@@ -10,8 +10,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import com.cts.idp.exceptions.ClassNotFoundException;
 import com.cts.idp.model.User;
+import com.cts.idp.service.CartService;
 import com.cts.idp.service.CatalogService;
 import com.cts.idp.service.GenreService;
+import com.cts.idp.service.OrderService;
 import com.cts.idp.service.UserService;
 import com.cts.idp.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -32,13 +34,17 @@ public class BookstoreApplication {
 		
 		GenreService genreService=ctx.getBean(GenreService.class);
 		log.debug("genreService : {}",genreService);
-//		
-//		UserService userService=ctx.getBean(UserService.class);
-//		log.debug("userService : {}",userService);
-//		
-//		UserService userService=ctx.getBean(UserService.class);
-//		log.debug("userService : {}",userService);
 		
+		CartService cartService=ctx.getBean(CartService.class);
+		log.debug("cartService : {}",cartService);
+		
+		OrderService orderService=ctx.getBean(OrderService.class);
+		log.debug("orderService : {}",orderService);
+		log.info("END");
+		
+		
+		
+//		genreService.showAll().forEach(System.out::println);
 //		System.out.println("Hello...\nWelcome to Book Store");
 //		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 //		

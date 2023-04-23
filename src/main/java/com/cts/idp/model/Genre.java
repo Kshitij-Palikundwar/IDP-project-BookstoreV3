@@ -20,30 +20,38 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "genre_tbl")
 public class Genre {
-	
 
 	@Id
 	@Column(name = "genre_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int genreId;
 	
-	@Column(name = "genre_name")
+	
 	private String genreName;
 	
 	// Here we are mapping genre with catalog table 
 	// Where 1 genre has Many books/products
 	@OneToMany(mappedBy="genre")
-	private List<Catalog> catalog = new ArrayList<>();
+	private List<Catalog> catalog ;
+//	public List<Catalog> getCatalog() {
+//	    return this.catalog;
+//	}
 
 
 	
+	public void setGenreId(int genreId) {
+		this.genreId = genreId;
+	}
 
-	public Genre(String genreName, List<Catalog> catalog) {
+	public Genre(String genreName, int genreId) {
 		super();
 		this.genreName = genreName;
-		this.catalog = catalog;
+		this.genreId = genreId;
 	}
 	
-
+//	public Genre(int genreId) {
+//		super();
+//		this.genreId = genreId;
+//	}
 
 }
