@@ -6,10 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.bookstore.model.Payment;
 import com.project.bookstore.model.Products;
 import com.project.bookstore.dao.ProductsRepository;
-import com.project.bookstore.exception.PaymentNotFoundException;
 import com.project.bookstore.exception.ProductsNotFoundException;
 
 @Service
@@ -56,14 +54,6 @@ public class ProductsServiceImpl implements ProductsService{
 		return optional.get();
 	}
 	
-//	@Override
-//	public Catalog findByBookName(String bookName) throws ClassNotFoundException {
-//		Optional<Catalog> optional=repo.findByBookName(bookName);
-//		if(optional.isEmpty()) {
-//			throw new ClassNotFoundException("Book Not Found Name: " + bookName);
-//		}
-//		return optional.get();
-//	}
 
 }
 

@@ -2,14 +2,14 @@ package com.project.bookstore.service;
 
 import java.util.List;
 
-import com.project.bookstore.model.Users;
+import com.project.bookstore.model.User;
 
 public interface UsersService {
-	public Users create(Users users);
+	public User create(User user);
 
-	public List<Users> findAll();
+	public List<User> findAll();
 
-	public Users findById(int id);
+	public User findById(int id);
 
 	public void deleteById(int customersId);
 }

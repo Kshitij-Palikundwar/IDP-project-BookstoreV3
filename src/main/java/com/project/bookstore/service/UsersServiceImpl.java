@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.bookstore.model.Users;
+import com.project.bookstore.model.User;
 import com.project.bookstore.dao.UsersRepository;
 import com.project.bookstore.exception.UsersNotFoundException;
 
@@ -18,19 +18,19 @@ public class UsersServiceImpl implements UsersService {
 	private UsersRepository repository;
 
 	@Override
-	public Users create(Users users) {
+	public User create(User user) {
 		
-		return repository.save(users);
+		return repository.save(user);
 	}
 
 	@Override
-	public List<Users> findAll() {
+	public List<User> findAll() {
 		return repository.findAll();
 	}
 
 	@Override
-	public Users findById(int id) {
-		Optional<Users> optional = repository.findById(id);
+	public User findById(int id) {
+		Optional<User> optional = repository.findById(id);
 		if(optional.isEmpty()) {
 			throw new UsersNotFoundException("Customer not found with id :" + id);
 		}
@@ -40,7 +40,7 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public void deleteById(int customersId) throws UsersNotFoundException {
-		Users customer = findById(customersId);
+		User customer = findById(customersId);
 		repository.deleteById(customersId);
 		
 	}

@@ -1,9 +1,8 @@
 package com.project.bookstore.model;
 
 import java.io.Serializable;
-import java.util.List;
-
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,7 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,35 +32,46 @@ public class Cart implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     
-    @Column(name="quantity")
+	@Id
+	@Column(name = "cart_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int cartId;
+	
+	@Column(name = "quantity")
 	private int quantity;
-    
-	@Column(name="price")
-	@JoinColumn(name = "price",  referencedColumnName = "net_price")
-	private float price;
 	
-	@Column(name="product_desc")
-	private String productDesc;
-
+	@Column(name = "price") 
+	private double price;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "product_id")
+//	private Products product;
+//	
+	
+	
 //	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-//	@JoinColumn(name = "product_id",  referencedColumnName = "id")
-//	private List<Cart> cart;
+//	@JoinColumn(name = "product_id",  referencedColumnName = "product_id")
+//	private Products product;
 	
+	@OneToOne(mappedBy="cart")
+    @ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Products products;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name = "cart_id",  referencedColumnName = "id")
-    private List<Products> products;
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name = "user_id",  referencedColumnName = "user_id")
+	private User user;
+	
+	
+	LocalDateTime time = LocalDateTime.now();
 
-
-    public Cart(int quantity, float price, String productDesc, List<Products> products) {
+	
+    public Cart(int quantity, float price) {
 		super();
 		this.quantity = quantity;
 		this.price = price;
-		this.productDesc = productDesc;
+//		this.productDesc = productDesc;
 		//this.products = products;
 	}
     

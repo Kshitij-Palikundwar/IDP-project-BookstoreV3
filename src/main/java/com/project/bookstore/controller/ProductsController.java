@@ -3,6 +3,7 @@ package com.project.bookstore.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.app.exceptions.SystemException;
+import com.project.bookstore.model.Genre;
 import com.project.bookstore.model.Products;
+import com.project.bookstore.service.GenresService;
 import com.project.bookstore.service.ProductsService;
 
 @RestController
@@ -19,6 +23,9 @@ import com.project.bookstore.service.ProductsService;
 public class ProductsController {
 	@Autowired
 	private ProductsService service;
+	
+	@Autowired
+	private GenresService genreService;
 	
 	/*
 	 * Used to retrieve the resources
@@ -39,10 +46,20 @@ public class ProductsController {
 		return service.findProductsByProductName(productName);
 	}
 	
+//	@PostMapping
+//	public ResponseEntity<Products> create(@RequestBody Products product) {
+//	    Products products = service.create(product); // persist the product
+//	    return ResponseEntity.ok(products);
+//	}
 	@PostMapping
-	public Products create(@RequestBody Products products) {
-		return service.create(products);
+	public ResponseEntity<Products> create(@RequestBody Products product) throws ClassNotFoundException, SystemException {
+	int genreId = product.getGenre().getGenreId();
+	Genre genre = genreService.findById(genreId); // retrieve the genre from the database
+	product.setGenre(genre); // associate the genre with the product
+	Products savedProduct = service.create(product); // persist the product
+	return ResponseEntity.ok(savedProduct);
 	}
+
 	
 	@DeleteMapping("/{id}")	
 	public void deleteById(@PathVariable("id") int id) {

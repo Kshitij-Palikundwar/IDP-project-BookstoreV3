@@ -1,5 +1,6 @@
 package com.project.bookstore.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -21,10 +22,15 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "orders")
-public class Orders {
+public class Orders implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "order_id")
+	private int orderId;
 	
 	@Column(name="order_date")
 	private String orderDate;
@@ -43,20 +49,20 @@ public class Orders {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id")
-	private Users users;
+	private User user;
 	
 //	@OneToMany(cascade = CascadeType.ALL)
 //	@JoinColumn(name="order_id")
 //	private List<Products> products;
 
 	public Orders(String orderDate, float totalPrice, String shippingAddress, Payment payment,
-			Users users) {
+			User user) {
 		super();
 		this.orderDate = orderDate;
 		this.totalPrice = totalPrice;
 		this.address = shippingAddress;
 		this.payment = payment;
-		this.users = users;
+		this.user = user;
 //		this.products = products;
 	}
 	

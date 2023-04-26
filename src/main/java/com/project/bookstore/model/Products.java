@@ -1,6 +1,7 @@
 package com.project.bookstore.model;
 import java.io.Serializable;
 import java.util.List;
+import java.util.*;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -29,7 +30,8 @@ public class Products implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "product_id")
+	private int productId;
 	
 	@Column(name="product_name")
 	private String productName;
@@ -41,7 +43,8 @@ public class Products implements Serializable {
 	private String productDesc;
 	
 	@Column(name="net_price")
-	private float cost;
+	private float netCost;
+	
 	@Column(name="product_quantity")
 	private int quantity;
 	
@@ -53,17 +56,28 @@ public class Products implements Serializable {
 //	private List<Cart> cart;
 	
 	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name = "genre_id", referencedColumnName = "id")
+	@JoinColumn(name = "genre_id", referencedColumnName = "genre_id")
 	private Genre genre;
+	
 
-	public Products(String productName, String productDesc, float cost, String productImage,int quantity) {
+	public Products(String productName, String productDesc, float netCost, String productImage,int quantity) {
 		super();
 		this.productName = productName;
 		this.productDesc = productDesc;
-		this.cost = cost;
+		this.netCost = netCost;
 		this.productImage = productImage;
 		this.quantity = quantity;
 	}
+
+	public Products(int productId, String productName, String productAuthor, double netCost) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productAuthor = productAuthor;
+		this.netCost = (float) netCost;
+	}
+
+	
 	
 	
 	

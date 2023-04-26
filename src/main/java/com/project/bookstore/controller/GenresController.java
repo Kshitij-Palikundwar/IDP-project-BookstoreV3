@@ -3,7 +3,7 @@ package com.project.bookstore.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +34,14 @@ public class GenresController {
 	}
 	
 	@PostMapping
-	public Genre create(@RequestBody Genre genre) {
-		return service.create(genre);
+	public ResponseEntity<Genre> create(@RequestBody Genre genre) {
+	    Genre savedGenre = service.create(genre); // persist the genre
+	    return ResponseEntity.ok(savedGenre);
 	}
+
+	
+//	@PostMapping
+//	public Genre create(@RequestBody Genre genre) {
+//		return service.create(genre);
+//	}
 }

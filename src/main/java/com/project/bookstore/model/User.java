@@ -1,6 +1,7 @@
 package com.project.bookstore.model;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -22,10 +23,16 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "users")
-public class  Users{
+public class  User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "user_id")
+	private int userId;
 	
 	@Column(name = "user_name")
 	private String name;
@@ -49,8 +56,9 @@ public class  Users{
 //	 @JoinColumn(name="user_id")
 //	  private List<Cart> cart;
 
-	public Users(String name, String email, String phoneNo, String address) {
+	public User(int UserId, String name, String email, String phoneNo, String address) {
 		super();
+		this.userId=userId;
 		this.name = name;
 		this.email = email;
 		this.phoneNo = phoneNo;
