@@ -22,6 +22,8 @@ import com.project.bookstore.service.CartService;
 import com.project.bookstore.service.ProductsService;
 import com.project.bookstore.service.UsersService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 
 @RestController
 @RequestMapping("/carts")
@@ -57,14 +59,36 @@ public class CartController {
 		 service.deleteById(id);
 	}
 	
+	// 7:45 26/04 working
+//	@PostMapping("/carts")
+//	public ResponseEntity<Cart> createCart(@RequestBody Cart cart) throws ClassNotFoundException, SystemException {
+//	    int productId = cart.getProducts().getProductId();
+//	    Products product = productService.findById(productId); // retrieve the product from the database
+//	    cart.setProducts(product); // associate the product with the cart
+//	    
+//	    int userId = cart.getUser().getUserId();
+//	    User user = userService.findById(userId); // retrieve the user from the database
+//	    cart.setUser(user); // associate the user with the cart
+//	    
+//	    Cart savedCart = service.saveCart(cart); // persist the cart
+//	    return ResponseEntity.ok(savedCart);
+//	}
+
+	
 	@PostMapping("/carts")
 	public ResponseEntity<Cart> createCart(@RequestBody Cart cart) throws ClassNotFoundException, SystemException {
-	    int productId = cart.getProducts().getProductId();
-	    Products product = productService.findById(productId); // retrieve the product from the database
+	    String productName = cart.getProducts().getProductName();
+	    Products product = productService.findProductsByProductName(productName); // retrieve the product from the database using productName
+	    if (product == null) {
+	        throw new EntityNotFoundException("Product not found with productName :" + productName);
+	    }
 	    cart.setProducts(product); // associate the product with the cart
 	    
-	    int userId = cart.getUser().getUserId();
-	    User user = userService.findById(userId); // retrieve the user from the database
+	    String userName = cart.getUser().getName();
+	    User user = userService.findByName(userName); // retrieve the user from the database
+	    if (user == null) {
+	        throw new EntityNotFoundException("User not found with name :" + userName);
+	    }
 	    cart.setUser(user); // associate the user with the cart
 	    
 	    Cart savedCart = service.saveCart(cart); // persist the cart

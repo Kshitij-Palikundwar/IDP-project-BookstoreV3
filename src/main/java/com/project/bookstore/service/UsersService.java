@@ -12,4 +12,6 @@ public interface UsersService {
 	public User findById(int id);
 
 	public void deleteById(int customersId);
+	
+	public User findByName(String name);
 }

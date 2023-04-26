@@ -45,6 +45,16 @@ public class UsersServiceImpl implements UsersService {
 		
 	}
 
+	@Override
+	public User findByName(String name) {
+		Optional<User> optional = repository.findByName(name);
+		if(optional.isEmpty()) {
+			throw new UsersNotFoundException("Customer not found with id :" + name);
+		}
+		
+		return optional.get();
+	}
+
 }
 
 
