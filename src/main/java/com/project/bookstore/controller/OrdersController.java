@@ -74,13 +74,13 @@ public class OrdersController {
 //	    }
 //	    order.setUser(user); // associate the user with the order
 	    
-//	    String paymentMethod = order.getPayment().getPaymentMethod();
-//	    Payment payment = paymentService.findByPaymentMethod(paymentMethod); // retrieve the product from the database using productName
-//	    if (payment == null) {
-//	        throw new EntityNotFoundException("paymentMethod not found :" + paymentMethod);
-//	    }
-//	    order.setPayment(payment); // associate the product with the order
-//	    
+	    String paymentMethod = order.getPayment().getPaymentMethod();
+	    Payment payment = paymentService.findByPaymentMethod(paymentMethod); // retrieve the product from the database using productName
+	    if (payment == null) {
+	        throw new EntityNotFoundException("paymentMethod not found :" + paymentMethod);
+	    }
+	    order.setPayment(payment); // associate the product with the order
+	    
 	    
 	    Orders savedOrders = service.create(order); // persist the order
 	    return ResponseEntity.ok(savedOrders);
