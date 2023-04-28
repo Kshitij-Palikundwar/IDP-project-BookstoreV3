@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 
 import com.project.bookstore.model.Cart;
+import com.project.bookstore.model.Products;
 
 
 
@@ -19,6 +20,8 @@ public interface CartService {
 	public void deleteById(int id);
 
 	public Cart saveCart(Cart cart);
+
+	public Cart findByProductName(String productName);
 	
 	//public void addToCart(int carId, CartItem cartItems);
 	

@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.app.exceptions.SystemException;
 import com.project.bookstore.model.Genre;
 import com.project.bookstore.model.Products;
 import com.project.bookstore.service.GenresService;
 import com.project.bookstore.service.ProductsService;
+
+import jakarta.transaction.SystemException;
 
 @RestController
 @RequestMapping("/products")

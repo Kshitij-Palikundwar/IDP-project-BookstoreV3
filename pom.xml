@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cts</groupId>
-	<artifactId>idp-project</artifactId>
+	<artifactId>project-bookstore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>idp-project</name>
 	<description>Demo project for Spring Boot</description>
@@ -51,11 +51,7 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.cts.app</groupId>
-			<artifactId>tender-management-system</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+	
 	</dependencies>
 
 	<build>

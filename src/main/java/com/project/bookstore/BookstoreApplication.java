@@ -1,6 +1,7 @@
 package com.project.bookstore;
 
 import java.io.IOException;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -8,6 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import com.project.bookstore.service.CartService;
 import com.project.bookstore.service.GenresService;
 import com.project.bookstore.service.OrdersService;
+import com.project.bookstore.service.PaymentService;
 import com.project.bookstore.service.ProductsService;
 import com.project.bookstore.service.UsersService;
 
@@ -32,6 +34,9 @@ public class BookstoreApplication {
 		
 		CartService cartService=ctx.getBean(CartService.class);
 		log.debug("cartService : {}",cartService);
+		
+		PaymentService paymentService=ctx.getBean(PaymentService.class);
+		log.debug("paymentService : {}",paymentService);
 		
 		OrdersService orderService=ctx.getBean(OrdersService.class);
 		log.debug("orderService : {}",orderService);

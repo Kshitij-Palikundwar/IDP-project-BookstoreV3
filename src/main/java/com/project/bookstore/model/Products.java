@@ -45,9 +45,6 @@ public class Products implements Serializable {
 	@Column(name="net_price")
 	private float netCost;
 	
-	@Column(name="product_quantity")
-	private int quantity;
-	
 	@Column(name="product_image")
 	private String productImage;
 	
@@ -58,24 +55,20 @@ public class Products implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name = "genre_id", referencedColumnName = "genre_id")
 	private Genre genre;
-	
 
-	public Products(String productName, String productDesc, float netCost, String productImage,int quantity) {
+	public Products(String productName, String productAuthor, String productDesc, float netCost, String productImage,
+			Genre genre) {
 		super();
 		this.productName = productName;
+		this.productAuthor = productAuthor;
 		this.productDesc = productDesc;
 		this.netCost = netCost;
 		this.productImage = productImage;
-		this.quantity = quantity;
+		this.genre = genre;
 	}
+	
 
-	public Products(int productId, String productName, String productAuthor, double netCost) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.productAuthor = productAuthor;
-		this.netCost = (float) netCost;
-	}
+	
 
 	
 	

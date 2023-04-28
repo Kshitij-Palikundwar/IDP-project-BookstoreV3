@@ -1,5 +1,6 @@
 package com.project.bookstore.service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import com.project.bookstore.model.Products;
 import com.project.bookstore.dao.CartRepository;
 import com.project.bookstore.dao.ProductsRepository;
 import com.project.bookstore.exception.CartNotFoundException;
+import com.project.bookstore.exception.ProductsNotFoundException;
 
 
 @Service
@@ -21,9 +23,13 @@ public class CartServiceImpl implements  CartService{
 	
 	@Autowired
 	CartRepository repository;
-
+	
+	@Autowired
+	ProductsRepository prodRepository;
+	
 	@Override
 	public Cart create(Cart cart) {
+		
 		
 		return repository.save(cart);
 	}
@@ -53,8 +59,24 @@ public class CartServiceImpl implements  CartService{
 
 	@Override
 	public Cart saveCart(Cart cart) {
+		Optional<Products> optionalProduct = prodRepository.findById(cart.getProducts().getProductId());
+		Products product = optionalProduct.get();
+		cart.setProducts(product);
+		cart.setPrice(product.getNetCost()*cart.getQuantity());
+		cart.setProductName(product.getProductName());
+		cart.setTime(LocalDateTime.now());
 		return repository.save(cart);
 	}
+
+	@Override
+	public Cart findByProductName(String productName) {
+		Optional<Cart> optional = repository.findCartByProductName(productName);
+		if(optional.isEmpty()) {
+			throw new ProductsNotFoundException("Book not found with Name :" + productName);
+		}		
+		return optional.get();
+	}
+	
 	
 //	public void addToCart(int carId, CartItem cartItems){
 //

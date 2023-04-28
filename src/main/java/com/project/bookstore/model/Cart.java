@@ -38,6 +38,9 @@ public class Cart implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartId;
 	
+	@Column(name = "product_name")
+	private String productName;
+	
 	@Column(name = "quantity")
 	private int quantity;
 	
@@ -63,18 +66,27 @@ public class Cart implements Serializable {
 	@JoinColumn(name = "user_id",  referencedColumnName = "user_id")
 	private User user;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="payment_id", referencedColumnName = "payment_id")
+	private Payment payment;
+	
 	
 	LocalDateTime time = LocalDateTime.now();
 
 	
-    public Cart(int quantity, float price) {
+  
+	public Cart(String productName, int quantity, double price, Products products, User user, Payment payment,
+			LocalDateTime time) {
 		super();
+		this.productName = productName;
 		this.quantity = quantity;
 		this.price = price;
-//		this.productDesc = productDesc;
-		//this.products = products;
+		this.products = products;
+		this.user = user;
+		this.payment = payment;
+		this.time = time;
 	}
-    
+
 
 }
 

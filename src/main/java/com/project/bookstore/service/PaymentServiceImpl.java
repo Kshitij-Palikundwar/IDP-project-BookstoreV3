@@ -28,11 +28,20 @@ public class PaymentServiceImpl implements PaymentService{
 		return repository.findAll();
 	}
 
+//	@Override
+//	public Payment findById(int id) {
+//		Optional<Payment> optional = repository.findById(id);
+//		if(optional.isEmpty()) {
+//			throw new PaymentNotFoundException("Payment not found with id :" + id);
+//		}		
+//		return optional.get();
+//	}
+
 	@Override
-	public Payment findById(int id) {
-		Optional<Payment> optional = repository.findById(id);
+	public Payment findByPaymentMethod(String paymentMethod) {
+		Optional<Payment> optional = repository.findByPaymentMethod(paymentMethod);
 		if(optional.isEmpty()) {
-			throw new PaymentNotFoundException("Payment not found with id :" + id);
+			throw new PaymentNotFoundException("Payment Method not found :" + paymentMethod);
 		}		
 		return optional.get();
 	}

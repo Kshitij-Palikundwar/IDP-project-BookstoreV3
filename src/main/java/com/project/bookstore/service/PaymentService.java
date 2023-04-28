@@ -10,6 +10,6 @@ public interface PaymentService {
 	
 	public List<Payment> findAll();
 	
-	public Payment findById(int id);
+	public Payment findByPaymentMethod(String paymentMethod);
 
 }
