@@ -54,16 +54,16 @@ public class OrdersController {
 		return service.findById(id);
 	}
 	
-	@PostMapping
-	public Orders create(@RequestBody Orders orders) {
-		return service.create(orders);
-	}
+//	@PostMapping
+//	public Orders create(@RequestBody Orders orders) {
+//		return service.create(orders);
+//	}
 	@PostMapping("/addBook")
-	public ResponseEntity<Orders> createOrders(@RequestBody Orders order) throws ClassNotFoundException, SystemException {
+	public ResponseEntity<Orders> create(@RequestBody Orders order) throws ClassNotFoundException, SystemException {
 	    String productName = order.getCart().getProductName();
 	    Cart cart = cartService.findByProductName(productName); // retrieve the product from the database using productName
 	    if (cart == null) {
-	        throw new EntityNotFoundException("Product not found with productName :" + productName);
+	        throw new EntityNotFoundException("Product not found in Cart with productName :" + productName);
 	    }
 	    order.setCart(cart); // associate the product with the order
 	    
@@ -74,13 +74,13 @@ public class OrdersController {
 //	    }
 //	    order.setUser(user); // associate the user with the order
 	    
-	    String paymentMethod = order.getPayment().getPaymentMethod();
-	    Payment payment = paymentService.findByPaymentMethod(paymentMethod); // retrieve the product from the database using productName
-	    if (payment == null) {
-	        throw new EntityNotFoundException("paymentMethod not found :" + paymentMethod);
-	    }
-	    order.setPayment(payment); // associate the product with the order
-	    
+//	    String paymentMethod = order.getPayment().getPaymentMethod();
+//	    Payment payment = paymentService.findByPaymentMethod(paymentMethod); // retrieve the product from the database using productName
+//	    if (payment == null) {
+//	        throw new EntityNotFoundException("paymentMethod not found :" + paymentMethod);
+//	    }
+//	    order.setPayment(payment); // associate the product with the order
+//	    
 	    
 	    Orders savedOrders = service.create(order); // persist the order
 	    return ResponseEntity.ok(savedOrders);

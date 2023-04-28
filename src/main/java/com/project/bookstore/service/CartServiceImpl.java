@@ -72,7 +72,7 @@ public class CartServiceImpl implements  CartService{
 	public Cart findByProductName(String productName) {
 		Optional<Cart> optional = repository.findCartByProductName(productName);
 		if(optional.isEmpty()) {
-			throw new ProductsNotFoundException("Book not found with Name :" + productName);
+			throw new ProductsNotFoundException("Book not found in Cart with Name :" + productName);
 		}		
 		return optional.get();
 	}

@@ -66,24 +66,23 @@ public class Cart implements Serializable {
 	@JoinColumn(name = "user_id",  referencedColumnName = "user_id")
 	private User user;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="payment_id", referencedColumnName = "payment_id")
-	private Payment payment;
-	
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name="payment_id", referencedColumnName = "payment_id")
+//	private Payment payment;
+//	
 	
 	LocalDateTime time = LocalDateTime.now();
 
 	
   
-	public Cart(String productName, int quantity, double price, Products products, User user, Payment payment,
-			LocalDateTime time) {
+	public Cart(String productName, int quantity, double price, Products products, User user, LocalDateTime time) {
 		super();
 		this.productName = productName;
 		this.quantity = quantity;
 		this.price = price;
 		this.products = products;
 		this.user = user;
-		this.payment = payment;
+//		this.payment = payment;
 		this.time = time;
 	}
 

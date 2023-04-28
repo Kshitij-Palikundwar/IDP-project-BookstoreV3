@@ -77,12 +77,12 @@ public class CartController {
 	    }
 	    cart.setUser(user); // associate the user with the cart
 	    
-	    String paymentMethod = cart.getPayment().getPaymentMethod();
-	    Payment payment = paymentService.findByPaymentMethod(paymentMethod); // retrieve the product from the database using productName
-	    if (payment == null) {
-	        throw new EntityNotFoundException("paymentMethod not found :" + paymentMethod);
-	    }
-	    cart.setPayment(payment); // associate the product with the cart
+//	    String paymentMethod = cart.getPayment().getPaymentMethod();
+//	    Payment payment = paymentService.findByPaymentMethod(paymentMethod); // retrieve the product from the database using productName
+//	    if (payment == null) {
+//	        throw new EntityNotFoundException("paymentMethod not found :" + paymentMethod);
+//	    }
+//	    cart.setPayment(payment); // associate the product with the cart
 	    
 	    
 	    Cart savedCart = service.saveCart(cart); // persist the cart
